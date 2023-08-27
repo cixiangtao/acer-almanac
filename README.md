@@ -1,21 +1,18 @@
 # acer-almanac
 
-> A Vue.js project
+> Acer 专用老黄历，acfun 官网 1:1 仿制，老板不来一发？
 
-## Build Setup
+## 下载地址
 
-``` bash
-# install dependencies
-npm install
+链接: [点我下载](https://pan.baidu.com/s/1r-wAuN2y1rlxpmtR9YqMPg)
+密码: jpkj
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 效果演示
 
-# build for production with minification
-npm run build
+![](http://oz2tkq0zj.bkt.clouddn.com/18-5-16/51440297.jpg)
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+## 安装方式
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+* 点击`更多工具`
+* 打开`扩展程序`
+* 将下载下来的`crx`文件，拖入到`扩展程序`页面中
