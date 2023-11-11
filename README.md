@@ -4,7 +4,9 @@
 
 ## 下载地址
 
-链接: [点我下载](https://pan.baidu.com/s/1r-wAuN2y1rlxpmtR9YqMPg)
+[Chrome 商店下载](https://chrome.google.com/webstore/detail/mpillbjfdgknknkjhmjnmabaoibojbmc/publish-accepted?authUser=0&hl=zh-CN)
+
+[百度网盘下载](https://pan.baidu.com/s/1r-wAuN2y1rlxpmtR9YqMPg)
 密码: jpkj
 
 ## 效果演示
