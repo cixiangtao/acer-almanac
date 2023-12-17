@@ -117,7 +117,7 @@
         </p>
       </div>
       <div>
-        <p class="item-sign-calendar" :style="'color:'+luck.color" :data-balloon="'今日运势指数：' + luck.attr + '%'" data-balloon-pos="left">{{luck.label}}</p>
+        <p class="item-sign-calendar" :style="`color:${luck.color}`" :data-balloon="`今日运势指数：${luck.attr}%`" data-balloon-pos="left">{{luck.label}}</p>
       </div>
     </div>
     <!--  -->
@@ -170,11 +170,8 @@ export default {
   },
   mounted() {
     this.date = getDay();
-    console.log(this.date);
     this.luck = Luck();
-    console.log(this.luck);
     this.fortune = Fortune();
-    console.log(this.fortune);
   }
 };
 </script>

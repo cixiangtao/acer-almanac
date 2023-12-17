@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Acfun老黄历",
   "description": "Acer专用老黄历",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "browser_action": {
     "default_title": "查看今日运势",
     "default_icon": {
