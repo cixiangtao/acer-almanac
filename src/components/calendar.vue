@@ -117,7 +117,11 @@
         </p>
       </div>
       <div>
-        <p class="item-sign-calendar" :style="`color:${luck.color}`" :data-balloon="`今日运势指数：${luck.attr}%`" data-balloon-pos="left">{{luck.label}}</p>
+        <template v-if="vIf">
+          <el-date-picker size="mini" v-model="birthday" format="yyyy 年 MM 月 dd 日" value-format="yyyyMMdd" type="date" placeholder="选择你的生日"></el-date-picker>
+          <el-button size="mini" @click="onClick">确认</el-button>
+        </template>
+        <p v-else @dblclick="dblClick" class="item-sign-calendar" :style="`color:${luck.color}`" :data-balloon="`今日运势指数：${luck.attr}%`" data-balloon-pos="left">{{luck.label}}</p>
       </div>
     </div>
     <!--  -->
@@ -165,13 +169,28 @@ export default {
       date: {},
       luck: "",
       fortune: {},
-      birthday: ""
+      birthday: "",
+      vIf: true
     };
+  },
+  methods: {
+    onClick() {
+      this.vIf = false;
+      console.log(this.birthday);
+    },
+    dblClick() {
+      this.vIf = true;
+    }
   },
   mounted() {
     this.date = getDay();
-    this.luck = Luck();
+    this.luck = Luck(this.birthday);
     this.fortune = Fortune();
+  },
+  watch: {
+    birthday() {
+      this.luck = Luck(this.birthday);
+    }
   }
 };
 </script>
