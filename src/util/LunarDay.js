@@ -2,10 +2,10 @@
  * @Author: 虾哔哔
  * @Date: 2018-05-15 15:23:56
  * @Last Modified by: 虾哔哔
- * @Last Modified time: 2018-05-25 15:30:55
+ * @Last Modified time: 2018-06-01 17:13:57
  */
 
-export default function () {
+export default function (yy, mm, dd) {
   let sWeek = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
   let dNow = new Date();
   let CalendarData = new Array(100);
@@ -124,9 +124,9 @@ export default function () {
       yr += 1900;
     return yr;
   }
-  let yy = dNow.getFullYear();
-  let mm = dNow.getMonth() + 1;
-  let dd = dNow.getDate();
+  yy = yy || dNow.getFullYear();
+  mm = mm || dNow.getMonth() + 1;
+  dd = dd || dNow.getDate();
   let ww = dNow.getDay();
   let ss = parseInt(dNow.getTime() / 1000);
 

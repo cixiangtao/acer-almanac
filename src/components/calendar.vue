@@ -170,7 +170,12 @@ export default {
       luck: "",
       fortune: {},
       birthday: "",
-      vIf: true
+      vIf: true,
+      setDate: {
+        yy: new Date().getFullYear(),
+        mm: new Date().getMonth() + 1,
+        dd: new Date().getDate()
+      }
     };
   },
   methods: {
@@ -183,13 +188,17 @@ export default {
     }
   },
   mounted() {
-    this.date = getDay();
+    this.date = getDay(this.setDate.yy, this.setDate.mm, this.setDate.dd);
+    this.fortune = Fortune(this.setDate.yy, this.setDate.mm, this.setDate.dd);
     this.luck = Luck(this.birthday);
-    this.fortune = Fortune();
   },
   watch: {
     birthday() {
       this.luck = Luck(this.birthday);
+    },
+    setDate() {
+      this.date = getDay(this.setDate.yy, this.setDate.mm, this.setDate.dd);
+      this.fortune = Fortune(this.setDate.yy, this.setDate.mm, this.setDate.dd);
     }
   }
 };
