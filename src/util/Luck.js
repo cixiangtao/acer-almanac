@@ -2,7 +2,15 @@
  * @Author: 虾哔哔
  * @Date: 2018-05-15 17:00:01
  * @Last Modified by: 虾哔哔
- * @Last Modified time: 2018-05-25 15:40:56
+ * @Last Modified time: 2018-06-05 14:07:46
+ */
+
+
+/**
+ * @description
+ * @export
+ * @param {*} bir
+ * @returns
  */
 export default function (bir) {
   let date = new Date(),

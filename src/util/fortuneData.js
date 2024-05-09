@@ -1,3 +1,9 @@
+/*
+ * @Author: 虾哔哔
+ * @Date: 2018-06-05 14:05:55
+ * @Last Modified by:   虾哔哔
+ * @Last Modified time: 2018-06-05 14:05:55
+ */
 export default [{
   name: "看AV",
   good: "释放压力，重铸自我",

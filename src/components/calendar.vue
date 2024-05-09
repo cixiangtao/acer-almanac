@@ -132,7 +132,7 @@
         </div>
         <ul class="r">
           <li v-for="item in fortune.good">
-            <img class="c" :src="'./static/img/' + item.img +'.gif'" alt="">
+            <img class="c" :src="`./static/img/${item.img}.gif`" alt="">
             <div>
               <p class="a">{{item.label}}</p>
               <p class="b">{{item.good}}</p>
@@ -146,7 +146,7 @@
         </div>
         <ul class="r">
           <li v-for="item in fortune.bad">
-            <img class="c" :src="'./static/img/' + item.img +'.gif'" alt="">
+            <img class="c" :src="`./static/img/${item.img}.gif`" alt="">
             <div>
               <p class="a">{{item.label}}</p>
               <p class="b">{{item.bad}}</p>
@@ -185,7 +185,11 @@ export default {
     },
     dblClick() {
       this.vIf = true;
-    }
+    },
+    beforeDay() {
+      this.setDate.dd;
+    },
+    afterDay() {}
   },
   mounted() {
     this.date = getDay(this.setDate.yy, this.setDate.mm, this.setDate.dd);
