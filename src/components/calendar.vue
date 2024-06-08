@@ -169,7 +169,7 @@ export default {
       date: {},
       luck: "",
       fortune: {},
-      birthday: "",
+      birthday: localStorage.getItem("ACER_BIR") || "",
       vIf: true,
       setDate: {
         yy: new Date().getFullYear(),
@@ -178,10 +178,15 @@ export default {
       }
     };
   },
+  // computed: {
+  //   Abirthday() {
+  //     return localStorage.getItem("ACER_BIR");
+  //   }
+  // },
   methods: {
     onClick() {
       this.vIf = false;
-      console.log(this.birthday);
+      localStorage.setItem("ACER_BIR", this.birthday);
     },
     dblClick() {
       this.vIf = true;
@@ -192,6 +197,10 @@ export default {
     afterDay() {}
   },
   mounted() {
+    if (this.birthday) {
+      this.vIf = false;
+    }
+    console.log(this.birthday);
     this.date = getDay(this.setDate.yy, this.setDate.mm, this.setDate.dd);
     this.fortune = Fortune(this.setDate.yy, this.setDate.mm, this.setDate.dd);
     this.luck = Luck(this.birthday);
