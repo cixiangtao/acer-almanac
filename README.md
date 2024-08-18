@@ -4,8 +4,7 @@
 
 ## 下载地址
 
-[百度网盘下载](https://pan.baidu.com/s/1r-wAuN2y1rlxpmtR9YqMPg)
-密码: jpkj
+[在线安装](https://chrome.google.com/webstore/detail/acfun%E8%80%81%E9%BB%84%E5%8E%86/mpillbjfdgknknkjhmjnmabaoibojbmc?utm_source=chrome-ntp-icon)
 
 ## 效果演示
 
