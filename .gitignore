@@ -1,9 +1,6 @@
 .DS_Store
 node_modules/
 /dist/
-src/util/Fortune.js
-
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
