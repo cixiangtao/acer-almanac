@@ -1,0 +1,44 @@
+:root {
+  color: #271d18;
+  background: #d8ccb5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 16% 12%, rgb(255 250 229 / 68%), transparent 28%),
+    radial-gradient(circle at 86% 88%, rgb(111 69 39 / 18%), transparent 32%), #d8ccb5;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    118deg,
+    transparent 0 7px,
+    rgb(63 39 22 / 2%) 7px 8px
+  );
+  content: "";
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  display: grid;
+  place-items: start center;
+  min-height: 100vh;
+  padding: clamp(18px, 6vw, 64px) 14px;
+}
+
+acer-almanac {
+  width: min(100%, 760px);
+}
