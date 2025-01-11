@@ -1,5 +1,5 @@
 import { getDateSeed, toCompactDateNumber } from "./date";
-import { mixSeed } from "./fortune";
+import { mixLegacySeed } from "./fortune-v1";
 import type { CalendarDate, LuckLabel, LuckResult } from "./types";
 
 export const getLuckLabel = (score: number): LuckLabel => {
@@ -14,7 +14,7 @@ export const getLuckLabel = (score: number): LuckLabel => {
 };
 
 export const calculateLuck = (date: CalendarDate, birthday: CalendarDate): LuckResult => {
-  const score = mixSeed(getDateSeed(date) * toCompactDateNumber(birthday), 6) % 100;
+  const score = mixLegacySeed(getDateSeed(date) * toCompactDateNumber(birthday), 6) % 100;
   const red = Number((10 + 0.8 * score).toFixed(1));
 
   return {
