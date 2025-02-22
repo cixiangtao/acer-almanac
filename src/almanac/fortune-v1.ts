@@ -1,4 +1,4 @@
-import { getDateSeed } from "./date";
+import { assertCalendarDate, getDateSeed } from "./date";
 import { FORTUNE_ACTIVITIES } from "./fortune-data";
 import type { CalendarDate, FortuneActivityDefinition, FortuneItem, FortuneResult } from "./types";
 
@@ -54,6 +54,7 @@ const selectLegacyItems = (
 };
 
 export const generateFortuneV1 = (date: CalendarDate): FortuneResult => {
+  assertCalendarDate(date);
   const seed = getDateSeed(date);
   const activities: FortuneActivityDefinition[] = [...FORTUNE_ACTIVITIES];
   const images = Array.from({ length: LEGACY_IMAGE_COUNT }, (_, index) => index + 1);

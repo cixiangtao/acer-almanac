@@ -36,6 +36,12 @@ export const isCalendarDate = (date: CalendarDate) => {
   );
 };
 
+export const assertCalendarDate = (date: CalendarDate, label = "date"): void => {
+  if (!isCalendarDate(date)) {
+    throw new RangeError(`${label} must be a valid calendar date`);
+  }
+};
+
 export const parseIsoDate = (value: string): CalendarDate | null => {
   const match = ISO_DATE_PATTERN.exec(value);
   if (!match) return null;
@@ -50,11 +56,19 @@ export const parseIsoDate = (value: string): CalendarDate | null => {
   return isCalendarDate(date) ? date : null;
 };
 
-export const formatIsoDate = ({ day, month, year }: CalendarDate) =>
-  `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+export const formatIsoDate = (date: CalendarDate) => {
+  assertCalendarDate(date);
+  const { day, month, year } = date;
 
-export const toUtcDate = ({ day, month, year }: CalendarDate) =>
-  new Date(Date.UTC(year, month - 1, day, 12));
+  return `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+};
+
+export const toUtcDate = (date: CalendarDate) => {
+  assertCalendarDate(date);
+  const { day, month, year } = date;
+
+  return new Date(Date.UTC(year, month - 1, day, 12));
+};
 
 export const getToday = (now = new Date()): CalendarDate => ({
   day: now.getDate(),
@@ -63,8 +77,9 @@ export const getToday = (now = new Date()): CalendarDate => ({
 });
 
 export const addDays = (date: CalendarDate, amount: number): CalendarDate => {
-  if (!isCalendarDate(date) || !Number.isInteger(amount)) {
-    throw new RangeError("addDays expects a valid calendar date and an integer amount");
+  assertCalendarDate(date);
+  if (!Number.isInteger(amount)) {
+    throw new RangeError("addDays expects an integer amount");
   }
 
   const shifted = toUtcDate(date);

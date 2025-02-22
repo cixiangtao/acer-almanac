@@ -1,4 +1,4 @@
-import { toUtcDate } from "./date";
+import { assertCalendarDate, toUtcDate } from "./date";
 import type { CalendarDate, LunarDate } from "./types";
 
 const ZODIAC = "鼠牛虎兔龙蛇马羊猴鸡狗猪";
@@ -8,6 +8,7 @@ const chineseCalendarFormatter = new Intl.DateTimeFormat("zh-CN-u-ca-chinese", {
 });
 
 export const getLunarDate = (date: CalendarDate): LunarDate => {
+  assertCalendarDate(date);
   const parts = Object.fromEntries(
     chineseCalendarFormatter.formatToParts(toUtcDate(date)).map(({ type, value }) => [type, value]),
   ) as Record<string, string>;

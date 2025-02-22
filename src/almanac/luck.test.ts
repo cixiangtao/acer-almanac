@@ -31,4 +31,13 @@ describe("birthday luck", () => {
       "大吉",
     ]);
   });
+
+  it("rejects invalid public inputs", () => {
+    const validDate = { year: 2026, month: 7, day: 13 };
+    const invalidDate = { year: 2023, month: 2, day: 29 };
+
+    expect(() => calculateLuck(validDate, invalidDate)).toThrow(RangeError);
+    expect(() => getLuckLabel(-1)).toThrow(RangeError);
+    expect(() => getLuckLabel(100)).toThrow(RangeError);
+  });
 });

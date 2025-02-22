@@ -29,4 +29,11 @@ describe("civil date utilities", () => {
   it("derives the weekday from the selected date", () => {
     expect(getWeekdayLabel({ year: 2026, month: 7, day: 13 })).toBe("星期一");
   });
+
+  it("rejects invalid dates at every public formatting boundary", () => {
+    const invalidDate = { year: 2023, month: 2, day: 29 };
+
+    expect(() => formatIsoDate(invalidDate)).toThrow(RangeError);
+    expect(() => getWeekdayLabel(invalidDate)).toThrow(RangeError);
+  });
 });
