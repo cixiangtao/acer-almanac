@@ -18,6 +18,24 @@ export interface FortuneActivityDefinition {
   readonly name: string;
 }
 
+export type FortuneCategory =
+  | "work"
+  | "learning"
+  | "health"
+  | "social"
+  | "home"
+  | "outdoors"
+  | "creativity"
+  | "entertainment";
+
+export interface FortuneContentDefinition {
+  readonly bad: readonly [string, string, ...string[]];
+  readonly category: FortuneCategory;
+  readonly good: readonly [string, string, ...string[]];
+  readonly id: string;
+  readonly name: string;
+}
+
 export interface FortuneItem {
   readonly activity: string;
   readonly description: string;
