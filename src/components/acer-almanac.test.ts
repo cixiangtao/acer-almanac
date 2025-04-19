@@ -27,8 +27,8 @@ describe("acer-almanac", () => {
     expect(content).toContain("星期一");
     expect(content).toContain("丙午(马)年 五月廿九");
     expect(content).toContain("半吉");
-    expect(content).toContain("跳槽");
-    expect(content).toContain("早睡");
+    expect(content).toContain("轻松慢跑");
+    expect(content).toContain("认真倾听");
   });
 
   it("moves to the next date and publishes a composed event", async () => {

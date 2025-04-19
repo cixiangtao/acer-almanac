@@ -38,6 +38,8 @@ export interface FortuneContentDefinition {
 
 export interface FortuneItem {
   readonly activity: string;
+  readonly activityId?: string;
+  readonly category?: FortuneCategory;
   readonly description: string;
   readonly image: number;
 }
@@ -45,6 +47,12 @@ export interface FortuneItem {
 export interface FortuneResult {
   readonly bad: readonly FortuneItem[];
   readonly good: readonly FortuneItem[];
+}
+
+export type FortuneVersion = "v1" | "v2";
+
+export interface AlmanacOptions {
+  readonly fortuneVersion?: FortuneVersion;
 }
 
 export type LuckLabel = "大凶" | "凶" | "末吉" | "半吉" | "吉" | "小吉" | "中吉" | "大吉";
@@ -58,6 +66,7 @@ export interface LuckResult {
 export interface AlmanacResult {
   readonly date: CalendarDate;
   readonly fortune: FortuneResult;
+  readonly fortuneVersion: FortuneVersion;
   readonly isoDate: string;
   readonly luck: LuckResult | null;
   readonly lunar: LunarDate;
