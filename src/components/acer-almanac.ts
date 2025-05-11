@@ -3,6 +3,7 @@ import { LitElement, css, html, nothing } from "lit";
 import {
   addDays,
   createAlmanac,
+  FORTUNE_CATEGORY_LABELS,
   formatIsoDate,
   getToday,
   parseIsoDate,
@@ -381,10 +382,25 @@ export class AcerAlmanac extends LitElement {
     }
 
     .activity {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
       margin: 0 0 3px;
       font-family: "STKaiti", "KaiTi", serif;
       font-size: 19px;
       font-weight: 700;
+    }
+
+    .category {
+      padding: 1px 5px;
+      border: 1px solid rgb(39 29 24 / 22%);
+      border-radius: 999px;
+      color: var(--almanac-muted);
+      font-family: "FangSong", "STFangsong", serif;
+      font-size: 9px;
+      font-weight: 400;
+      line-height: 1.3;
     }
 
     .description {
@@ -589,11 +605,16 @@ export class AcerAlmanac extends LitElement {
         <div class="section-mark" aria-hidden="true">${label}</div>
         <ul class="fortune-list" aria-label="${label}做的事">
           ${items.map(
-            ({ activity, description, image }) => html`
+            ({ activity, category, description, image }) => html`
               <li class="fortune-item" part="fortune-item">
                 <img src="/img/${image}.gif" alt="" width="48" height="48" />
                 <div>
-                  <p class="activity">${activity}</p>
+                  <p class="activity">
+                    <span>${activity}</span>
+                    ${category
+                      ? html`<span class="category">${FORTUNE_CATEGORY_LABELS[category]}</span>`
+                      : nothing}
+                  </p>
                   <p class="description">${description}</p>
                 </div>
               </li>

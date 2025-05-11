@@ -29,6 +29,8 @@ describe("acer-almanac", () => {
     expect(content).toContain("半吉");
     expect(content).toContain("轻松慢跑");
     expect(content).toContain("认真倾听");
+    expect(content).toContain("健康");
+    expect(content).toContain("社交");
   });
 
   it("moves to the next date and publishes a composed event", async () => {
