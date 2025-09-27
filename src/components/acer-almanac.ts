@@ -11,6 +11,18 @@ import {
   type FortuneItem,
 } from "../almanac";
 
+const FORTUNE_IMAGE_URLS = import.meta.glob("../assets/fortune/*.webp", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const getFortuneImageUrl = (image: number) => {
+  const imageUrl = FORTUNE_IMAGE_URLS[`../assets/fortune/${image}.webp`];
+  if (!imageUrl) throw new RangeError(`Missing fortune image: ${image}`);
+  return imageUrl;
+};
+
 export interface AlmanacDateChangeDetail {
   readonly date: string;
 }
@@ -607,7 +619,13 @@ export class AcerAlmanac extends LitElement {
           ${items.map(
             ({ activity, category, description, image }) => html`
               <li class="fortune-item" part="fortune-item">
-                <img src="/img/${image}.gif" alt="" width="48" height="48" />
+                <img
+                  src=${getFortuneImageUrl(image)}
+                  alt=""
+                  width="48"
+                  height="48"
+                  decoding="async"
+                />
                 <div>
                   <p class="activity">
                     <span>${activity}</span>

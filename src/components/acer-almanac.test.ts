@@ -31,6 +31,13 @@ describe("acer-almanac", () => {
     expect(content).toContain("认真倾听");
     expect(content).toContain("健康");
     expect(content).toContain("社交");
+
+    const images = element.shadowRoot?.querySelectorAll<HTMLImageElement>(".fortune-item img");
+    expect(images?.length).toBeGreaterThan(0);
+    for (const image of images ?? []) {
+      expect(image.getAttribute("src")).toMatch(/\/fortune\/\d+\.webp$/);
+      expect(image.decoding).toBe("async");
+    }
   });
 
   it("moves to the next date and publishes a composed event", async () => {
