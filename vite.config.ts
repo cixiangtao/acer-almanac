@@ -1,7 +1,6 @@
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
-  publicDir: "static",
   staged: {
     "*": "vp check --fix",
   },
