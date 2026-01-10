@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "private": true,
   "description": "A deterministic Chinese almanac Web Component built with Lit",
-  "author": "mrcxt <847428891@qq.com>",
+  "author": "cixiangtao",
   "scripts": {
     "build": "vp build",
     "check": "vp check",
