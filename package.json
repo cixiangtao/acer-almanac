@@ -8,6 +8,7 @@
     "build": "vp build",
     "check": "vp check",
     "dev": "vp dev",
+    "lint:fix": "vp lint --fix",
     "prepare": "vp config"
   },
   "dependencies": {
