@@ -1,6 +1,7 @@
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
 
 const sitesWorker = `const worker = {
@@ -23,6 +24,7 @@ export default defineConfig({
     outDir: "dist/client",
   },
   plugins: [
+    tailwindcss(),
     {
       name: "sites",
       apply: "build",

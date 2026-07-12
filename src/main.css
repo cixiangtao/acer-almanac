@@ -1,3 +1,10 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+@source "../index.html";
+
 :root {
   color: #271d18;
   background: #d8ccb5;
@@ -29,16 +36,4 @@ body::before {
   );
   content: "";
   pointer-events: none;
-}
-
-main {
-  position: relative;
-  display: grid;
-  place-items: start center;
-  min-height: 100vh;
-  padding: clamp(18px, 6vw, 64px) 14px;
-}
-
-acer-almanac {
-  width: min(100%, 760px);
 }
