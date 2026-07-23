@@ -53,12 +53,13 @@ if (date) {
 `acer-almanac` 输出 ESM、source map 与 TypeScript 声明。每日宜忌默认使用 `v2`，同一天始终得到
 相同结果；需要回放旧结果时可以传入 `{ fortuneVersion: "v1" }`。
 
-发布前可检查真实 npm 内容：
+发布由 `release-it` 统一执行。它会在发布前检查格式、lint、类型、测试和真实 npm
+打包内容，然后更新版本、创建 Git commit 与 tag、推送并发布到 npm：
 
 ```bash
-cd packages/core
-pnpm pack --dry-run
-pnpm publish
+pnpm run release:check
+pnpm run release:dry
+pnpm run release
 ```
 
 ## Chrome 扩展

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://unpkg.com/release-it@20/schema/release-it.json",
+  "git": {
+    "commitMessage": "chore(release): v${version}",
+    "requireBranch": "master",
+    "requireCleanWorkingDir": true,
+    "tagName": "v${version}"
+  },
+  "hooks": {
+    "before:init": "pnpm --dir ../.. run release:check"
+  },
+  "npm": {
+    "publish": true,
+    "publishArgs": ["--access", "public"]
+  }
+}
