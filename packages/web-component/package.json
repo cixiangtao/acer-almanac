@@ -1,0 +1,13 @@
+{
+  "name": "@acer-almanac/web-component",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "acer-almanac": "workspace:*",
+    "lit": "^3.3.3"
+  }
+}

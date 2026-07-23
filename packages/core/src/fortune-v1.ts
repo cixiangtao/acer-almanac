@@ -53,6 +53,7 @@ const selectLegacyItems = (
   return items;
 };
 
+/** Replays the deterministic legacy fortune algorithm for compatibility. */
 export const generateFortuneV1 = (date: CalendarDate): FortuneResult => {
   assertCalendarDate(date);
   const seed = getDateSeed(date);

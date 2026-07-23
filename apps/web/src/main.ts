@@ -1,7 +1,7 @@
 import "./main.css";
-import "./components/acer-almanac";
-import { parseIsoDate } from "./almanac";
-import type { AcerAlmanac } from "./components/acer-almanac";
+import "@acer-almanac/web-component";
+import type { AcerAlmanac } from "@acer-almanac/web-component";
+import { parseIsoDate } from "acer-almanac";
 
 const BIRTHDAY_STORAGE_KEY = "ACER_BIR";
 const almanac = document.querySelector<AcerAlmanac>("acer-almanac");

@@ -6,7 +6,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "types": ["chrome"]
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["apps", "packages", "vite.config.ts"]
 }

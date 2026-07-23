@@ -2,6 +2,7 @@ import { assertCalendarDate, getDateSeed, toCompactDateNumber } from "./date";
 import { mixLegacySeed } from "./fortune-v1";
 import type { CalendarDate, LuckLabel, LuckResult } from "./types";
 
+/** Maps an integer score from 0 through 99 to its traditional luck label. */
 export const getLuckLabel = (score: number): LuckLabel => {
   if (!Number.isInteger(score) || score < 0 || score > 99) {
     throw new RangeError("score must be an integer between 0 and 99");
@@ -17,6 +18,7 @@ export const getLuckLabel = (score: number): LuckLabel => {
   return "大吉";
 };
 
+/** Calculates a deterministic birthday-based luck score for a date. */
 export const calculateLuck = (date: CalendarDate, birthday: CalendarDate): LuckResult => {
   assertCalendarDate(date);
   assertCalendarDate(birthday, "birthday");

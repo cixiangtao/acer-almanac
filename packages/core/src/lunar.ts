@@ -7,6 +7,11 @@ const chineseCalendarFormatter = new Intl.DateTimeFormat("zh-CN-u-ca-chinese", {
   timeZone: "UTC",
 });
 
+/**
+ * Formats a Gregorian date with the runtime's Chinese lunar calendar support.
+ *
+ * @throws {RangeError} When the date is invalid or the runtime cannot produce lunar parts.
+ */
 export const getLunarDate = (date: CalendarDate): LunarDate => {
   assertCalendarDate(date);
   const parts = Object.fromEntries(

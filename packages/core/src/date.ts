@@ -20,6 +20,7 @@ const getDaysInMonth = (year: number, month: number) => {
   return days[month - 1] ?? 0;
 };
 
+/** Checks whether a value represents a supported Gregorian calendar date. */
 export const isCalendarDate = (date: CalendarDate) => {
   const { day, month, year } = date;
 
@@ -42,6 +43,11 @@ export const assertCalendarDate = (date: CalendarDate, label = "date"): void => 
   }
 };
 
+/**
+ * Parses a strict `YYYY-MM-DD` value.
+ *
+ * @returns The parsed calendar date, or `null` when the value is malformed or invalid.
+ */
 export const parseIsoDate = (value: string): CalendarDate | null => {
   const match = ISO_DATE_PATTERN.exec(value);
   if (!match) return null;
@@ -56,6 +62,7 @@ export const parseIsoDate = (value: string): CalendarDate | null => {
   return isCalendarDate(date) ? date : null;
 };
 
+/** Formats a valid calendar date as `YYYY-MM-DD`. */
 export const formatIsoDate = (date: CalendarDate) => {
   assertCalendarDate(date);
   const { day, month, year } = date;
@@ -70,12 +77,14 @@ export const toUtcDate = (date: CalendarDate) => {
   return new Date(Date.UTC(year, month - 1, day, 12));
 };
 
+/** Returns the local calendar date for the supplied instant. */
 export const getToday = (now = new Date()): CalendarDate => ({
   day: now.getDate(),
   month: now.getMonth() + 1,
   year: now.getFullYear(),
 });
 
+/** Returns a new calendar date shifted by an integer number of days. */
 export const addDays = (date: CalendarDate, amount: number): CalendarDate => {
   assertCalendarDate(date);
   if (!Number.isInteger(amount)) {
@@ -92,6 +101,7 @@ export const addDays = (date: CalendarDate, amount: number): CalendarDate => {
   };
 };
 
+/** Returns the Chinese weekday label for a valid calendar date. */
 export const getWeekdayLabel = (date: CalendarDate) => WEEKDAY_LABELS[toUtcDate(date).getUTCDay()];
 
 export const getDateSeed = ({ day, month, year }: CalendarDate) =>

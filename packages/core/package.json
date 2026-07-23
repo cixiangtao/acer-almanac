@@ -1,0 +1,42 @@
+{
+  "name": "acer-almanac",
+  "version": "1.0.2",
+  "description": "Deterministic Chinese almanac, lunar date, fortune, and birthday luck utilities",
+  "keywords": [
+    "almanac",
+    "chinese-calendar",
+    "fortune",
+    "lunar-calendar"
+  ],
+  "homepage": "https://cixiangtao.github.io/acer-almanac/",
+  "bugs": {
+    "url": "https://github.com/cixiangtao/acer-almanac/issues"
+  },
+  "author": "cixiangtao",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cixiangtao/acer-almanac.git",
+    "directory": "packages/core"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "prepack": "vp pack"
+  },
+  "engines": {
+    "node": ">= 22.0.0"
+  }
+}

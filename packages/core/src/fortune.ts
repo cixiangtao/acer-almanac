@@ -169,6 +169,11 @@ const selectV2Items = (
   return items;
 };
 
+/**
+ * Generates the current deterministic fortune result for a date.
+ *
+ * The selection contains no duplicate activities or images.
+ */
 export const generateFortuneV2 = (date: CalendarDate): FortuneResult => {
   assertCalendarDate(date);
   const random = createRandom(hashString(`${FORTUNE_NAMESPACE}|${formatIsoDate(date)}`));
@@ -193,4 +198,5 @@ export const generateFortuneV2 = (date: CalendarDate): FortuneResult => {
   return { good, bad };
 };
 
+/** Alias for the current fortune algorithm. */
 export const generateFortune = generateFortuneV2;

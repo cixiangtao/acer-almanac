@@ -4,6 +4,13 @@ import { calculateLuck } from "./luck";
 import { getLunarDate } from "./lunar";
 import type { AlmanacOptions, AlmanacResult, CalendarDate, FortuneVersion } from "./types";
 
+/**
+ * Builds the complete almanac result for a calendar date.
+ *
+ * Results are deterministic for the same date, birthday, and fortune version.
+ *
+ * @throws {RangeError} When either date is invalid or the fortune version is unsupported.
+ */
 export const createAlmanac = (
   date: CalendarDate,
   birthday?: CalendarDate,

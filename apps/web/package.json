@@ -1,0 +1,18 @@
+{
+  "name": "@acer-almanac/web",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vp build",
+    "dev": "vp dev"
+  },
+  "dependencies": {
+    "@acer-almanac/web-component": "workspace:*",
+    "acer-almanac": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}

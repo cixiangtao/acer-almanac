@@ -1,23 +1,23 @@
 {
-  "name": "acer-almanac",
+  "name": "acer-almanac-workspace",
   "version": "1.0.2",
   "private": true,
-  "description": "A deterministic Chinese almanac Web Component built with Lit",
+  "description": "A deterministic Chinese almanac npm package, Web Component, Chrome extension, and preview",
   "author": "cixiangtao",
   "scripts": {
-    "build": "vp build",
+    "build": "vp run -r build",
+    "build:core": "vp run acer-almanac#build",
+    "build:extension": "vp run @acer-almanac/chrome-extension#build",
     "check": "vp check",
-    "dev": "vp dev",
+    "dev": "vp run @acer-almanac/web#dev",
+    "dev:extension": "vp run @acer-almanac/chrome-extension#dev",
     "lint:fix": "vp lint --fix",
-    "prepare": "vp config"
-  },
-  "dependencies": {
-    "lit": "^3.3.3"
+    "prepare": "vp config && vp run acer-almanac#build",
+    "test": "vp test"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.2",
+    "@types/chrome": "^0.1.6",
     "happy-dom": "^20.10.6",
-    "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "vite-plus": "0.2.2"
   },

@@ -1,5 +1,3 @@
-import { LitElement, css, html, nothing } from "lit";
-
 import {
   addDays,
   createAlmanac,
@@ -9,16 +7,17 @@ import {
   parseIsoDate,
   type CalendarDate,
   type FortuneItem,
-} from "../almanac";
+} from "acer-almanac";
+import { LitElement, css, html, nothing } from "lit";
 
-const FORTUNE_IMAGE_URLS = import.meta.glob("../assets/fortune/*.webp", {
+const FORTUNE_IMAGE_URLS = import.meta.glob("./assets/fortune/*.webp", {
   eager: true,
   import: "default",
   query: "?url",
 });
 
 const getFortuneImageUrl = (image: number) => {
-  const imageUrl = FORTUNE_IMAGE_URLS[`../assets/fortune/${image}.webp`];
+  const imageUrl = FORTUNE_IMAGE_URLS[`./assets/fortune/${image}.webp`];
   if (!imageUrl) throw new RangeError(`Missing fortune image: ${image}`);
   return imageUrl;
 };
