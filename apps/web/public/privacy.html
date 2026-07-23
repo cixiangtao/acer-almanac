@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Acer 老黄历 Chrome 扩展隐私政策：生日仅保存在用户设备本地，不会上传或共享。"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <title>隐私政策 · Acer 老黄历</title>
+    <style>
+      :root {
+        color: #271d18;
+        background: #d8ccb5;
+        font-family: "FangSong", "STFangsong", "Noto Serif CJK SC", serif;
+        font-synthesis: none;
+        line-height: 1.75;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(circle at 16% 12%, rgb(255 250 229 / 68%), transparent 28%),
+          radial-gradient(circle at 86% 88%, rgb(111 69 39 / 18%), transparent 32%), #d8ccb5;
+      }
+
+      main {
+        width: min(760px, calc(100% - 36px));
+        margin: 36px auto;
+        border: 1px solid rgb(39 29 24 / 22%);
+        background: #f6edda;
+        box-shadow: 8px 8px 0 rgb(39 29 24 / 9%);
+      }
+
+      header,
+      article,
+      footer {
+        padding: 24px clamp(22px, 5vw, 48px);
+      }
+
+      header {
+        border-block-end: 1px solid rgb(39 29 24 / 22%);
+      }
+
+      h1,
+      h2 {
+        font-family: "STKaiti", "KaiTi", serif;
+      }
+
+      h1 {
+        margin: 0;
+        color: #a62820;
+        font-size: clamp(34px, 7vw, 52px);
+        line-height: 1.1;
+      }
+
+      h2 {
+        margin-block: 28px 8px;
+        font-size: 22px;
+      }
+
+      p,
+      ul {
+        margin-block: 8px;
+      }
+
+      a {
+        color: #a62820;
+        text-underline-offset: 4px;
+      }
+
+      .meta {
+        margin-block-start: 8px;
+        color: #6f6156;
+        font-size: 13px;
+      }
+
+      footer {
+        border-block-start: 1px solid rgb(39 29 24 / 22%);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Acer 老黄历隐私政策</h1>
+        <p class="meta">生效日期：2026 年 7 月 23 日</p>
+      </header>
+
+      <article>
+        <p>
+          Acer 老黄历是一款离线优先的 Chrome 扩展，用于在工具栏弹窗中展示公历、农历、每日宜忌和
+          基于用户生日计算的运势。
+        </p>
+
+        <h2>处理的数据</h2>
+        <p>
+          扩展仅处理用户主动输入的生日。生日可能属于个人信息，但它只用于在用户设备本地计算和展示
+          生日运势。
+        </p>
+
+        <h2>数据存储</h2>
+        <p>
+          生日通过 <code>chrome.storage.local</code>
+          保存在用户设备本地，以便下次打开扩展时恢复。扩展不会将生日或其他用户数据发送到开发者服务器
+          或任何第三方。
+        </p>
+
+        <h2>数据共享与使用</h2>
+        <ul>
+          <li>不出售、共享或传输用户数据。</li>
+          <li>不将用户数据用于广告、信用评估或与核心功能无关的用途。</li>
+          <li>不收集浏览记录、网站内容、位置、身份验证信息或使用分析数据。</li>
+          <li>不加载或执行远程代码。</li>
+        </ul>
+
+        <h2>权限说明</h2>
+        <p>
+          扩展仅申请 <code>storage</code> 权限，用于保存用户主动输入的生日。该权限不用于读取网页内容
+          或跟踪浏览活动。
+        </p>
+
+        <h2>用户控制</h2>
+        <p>用户可以随时在扩展中修改生日。卸载扩展会删除由扩展保存在 Chrome 本地存储中的数据。</p>
+
+        <h2>有限使用</h2>
+        <p>
+          本扩展对 Chrome API 所获取信息的使用遵守 Chrome Web Store 用户数据政策，包括 Limited Use
+          要求。
+        </p>
+
+        <h2>政策变更</h2>
+        <p>如果扩展的数据处理方式发生变化，本页面会同步更新，并标注新的生效日期。</p>
+
+        <h2>联系我们</h2>
+        <p>
+          如对本隐私政策有疑问，请通过
+          <a href="https://github.com/cixiangtao/acer-almanac/issues">GitHub Issues</a>
+          联系。
+        </p>
+      </article>
+
+      <footer><a href="./">返回 Acer 老黄历</a></footer>
+    </main>
+  </body>
+</html>
