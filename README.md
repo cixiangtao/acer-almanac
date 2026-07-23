@@ -70,6 +70,37 @@ pnpm run build:extension
 然后打开 `chrome://extensions`，启用“开发者模式”，点击“加载已解压的扩展程序”，选择
 `apps/chrome-extension/dist`。扩展只申请 `storage` 权限，用于保存生日；所有黄历计算均在本地完成。
 
+扩展隐私政策发布在：
+
+<https://cixiangtao.github.io/acer-almanac/privacy.html>
+
+### Chrome Web Store 自动发布
+
+Chrome Web Store 首个条目、商店详情、隐私声明和首次可见范围需要在 Developer Dashboard
+中设置。首次发布完成后，可使用 API V2 自动提交后续版本。
+
+将本地忽略文件 `.env.chrome-webstore` 填写完整：
+
+```dotenv
+CWS_CLIENT_ID=
+CWS_CLIENT_SECRET=
+CWS_REFRESH_TOKEN=
+CWS_PUBLISHER_ID=
+CWS_EXTENSION_ID=
+```
+
+检查后同步到当前 GitHub 仓库：
+
+```bash
+pnpm run cws:secrets -- --dry-run
+pnpm run cws:secrets
+pnpm run cws:status
+```
+
+后续提升 `apps/chrome-extension/public/manifest.json` 与
+`apps/chrome-extension/package.json` 的版本号，再从 GitHub Actions 手动运行
+`Publish Chrome Extension`。工作流会执行检查、测试、构建和打包；本地版本已发布或已提交审核时会安全跳过。
+
 ## GitHub Pages
 
 `.github/workflows/deploy-pages.yml` 会在推送到 `master` 后执行检查、测试和全量构建，再将
