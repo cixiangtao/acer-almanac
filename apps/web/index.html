@@ -3,16 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Acer 专用老黄历：每日宜忌、农历与生日运势" />
+    <meta
+      name="description"
+      content="Acer 老黄历：可复用的 TypeScript 核心包、Chrome 扩展与每日宜忌在线预览"
+    />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-    <title>Acer 老黄历</title>
+    <title>Acer 老黄历 · 开发者预览</title>
   </head>
   <body>
-    <main
-      class="relative grid min-h-screen items-start justify-items-center px-3.5 py-[clamp(18px,6vw,64px)]"
-    >
-      <acer-almanac class="w-[min(100%,760px)]"></acer-almanac>
-    </main>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Acer 老黄历首页">
+          <span class="brand-seal" aria-hidden="true">AC</span>
+          <span>
+            <strong>Acer 老黄历</strong>
+            <small>ALMANAC FOR EVERY RUNTIME</small>
+          </span>
+        </a>
+        <nav aria-label="项目导航">
+          <a href="#npm-package">npm 包</a>
+          <a href="#chrome-extension">Chrome 扩展</a>
+          <a href="https://github.com/cixiangtao/acer-almanac">GitHub ↗</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="kicker"><span>01</span> 同一算法，多种入口</p>
+            <h1 id="hero-title">把每日宜忌，<em>带到任何地方。</em></h1>
+            <p class="hero-lead">
+              一套确定性的 TypeScript 老黄历核心能力，驱动 npm 包、Chrome 工具栏与这个在线预览页。
+              无服务端、无随机漂移，同一天永远得到同一份结果。
+            </p>
+
+            <div class="install-command" id="npm-package">
+              <span class="terminal-dot" aria-hidden="true"></span>
+              <code data-install-command>pnpm add acer-almanac</code>
+              <button type="button" data-copy-install>复制</button>
+            </div>
+
+            <dl class="project-facts">
+              <div>
+                <dt>0</dt>
+                <dd>核心运行时依赖</dd>
+              </div>
+              <div>
+                <dt>54</dt>
+                <dd>运势插图</dd>
+              </div>
+              <div>
+                <dt>∞</dt>
+                <dd>确定性日期结果</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="preview-stage">
+            <p class="stage-label">LIVE / 今日签</p>
+            <acer-almanac></acer-almanac>
+          </div>
+        </section>
+
+        <section class="delivery-grid" aria-labelledby="delivery-title">
+          <div class="section-heading">
+            <p class="kicker"><span>02</span> 交付形态</p>
+            <h2 id="delivery-title">一份能力，三个恰当的容器。</h2>
+          </div>
+
+          <article>
+            <span class="card-index">A</span>
+            <p class="card-tag">HEADLESS</p>
+            <h3>npm 核心包</h3>
+            <p>纯 TypeScript API，输出农历、宜忌与生日运势。适合 Node.js、前端框架和自动化脚本。</p>
+            <code>import { createAlmanac } from "acer-almanac";</code>
+          </article>
+
+          <article id="chrome-extension">
+            <span class="card-index">B</span>
+            <p class="card-tag">MANIFEST V3</p>
+            <h3>Chrome 扩展</h3>
+            <p>
+              点击工具栏即可打开完整老黄历，生日通过 Chrome Storage 保留，构建后可直接加载解压目录。
+            </p>
+            <code>pnpm run build:extension</code>
+          </article>
+
+          <article>
+            <span class="card-index">C</span>
+            <p class="card-tag">GITHUB PAGES</p>
+            <h3>在线预览</h3>
+            <p>每次推送到 master 都会检查、测试并部署。当前页面本身就是共享组件的真实运行结果。</p>
+            <a href="https://github.com/cixiangtao/acer-almanac/actions">查看部署记录 ↗</a>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <span>开源、离线优先、结果可复现。</span>
+        <span>© 2026 ACER ALMANAC</span>
+      </footer>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -28,3 +28,21 @@ if (almanac) {
     }
   });
 }
+
+const installCommand = document.querySelector<HTMLElement>("[data-install-command]");
+const copyButton = document.querySelector<HTMLButtonElement>("[data-copy-install]");
+
+copyButton?.addEventListener("click", async () => {
+  if (!installCommand) return;
+
+  try {
+    await navigator.clipboard.writeText(installCommand.textContent ?? "");
+    copyButton.textContent = "已复制";
+  } catch {
+    copyButton.textContent = "复制失败";
+  }
+
+  window.setTimeout(() => {
+    copyButton.textContent = "复制";
+  }, 1_600);
+});
