@@ -9,9 +9,13 @@
     "build:core": "vp run acer-almanac#build",
     "build:extension": "vp run @acer-almanac/chrome-extension#build",
     "check": "vp check",
+    "cws:publish": "node scripts/chrome-webstore.mjs publish",
+    "cws:secrets": "node scripts/sync-chrome-webstore-secrets.mjs",
+    "cws:status": "node scripts/chrome-webstore.mjs status",
     "dev": "vp run @acer-almanac/web#dev",
     "dev:extension": "vp run @acer-almanac/chrome-extension#dev",
     "lint:fix": "vp lint --fix",
+    "package:extension": "node scripts/package-chrome-extension.mjs",
     "prepare": "vp config && vp run acer-almanac#build",
     "test": "vp test"
   },
