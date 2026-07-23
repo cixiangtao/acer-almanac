@@ -1,0 +1,14 @@
+{
+  "name": "@acer-almanac/chrome-extension",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vp build",
+    "dev": "vp dev"
+  },
+  "dependencies": {
+    "@acer-almanac/web-component": "workspace:*",
+    "acer-almanac": "workspace:*"
+  }
+}

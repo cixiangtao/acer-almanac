@@ -1,0 +1,40 @@
+:root {
+  color: #271d18;
+  background: #cbbd9f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  width: 720px;
+  min-height: 560px;
+  margin: 0;
+  background:
+    radial-gradient(circle at 8% 8%, rgb(255 250 229 / 82%), transparent 28%),
+    linear-gradient(135deg, rgb(120 31 24 / 8%), transparent 36%), #d8ccb5;
+}
+
+.popup-shell {
+  padding: 14px;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: 10px;
+  color: #615348;
+  font-family: "FangSong", "STFangsong", serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.popup-header strong {
+  color: #9f271f;
+  font-family: "STKaiti", "KaiTi", serif;
+  font-size: 16px;
+}
+
+acer-almanac {
+  max-inline-size: none;
+}

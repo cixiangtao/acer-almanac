@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Acer 老黄历",
+  "version": "1.0.2",
+  "description": "在 Chrome 工具栏快速查看每日宜忌、农历和生日运势。",
+  "action": {
+    "default_icon": {
+      "16": "icon-16.png",
+      "32": "icon-32.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "打开 Acer 老黄历"
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": ["storage"],
+  "homepage_url": "https://cixiangtao.github.io/acer-almanac/"
+}
