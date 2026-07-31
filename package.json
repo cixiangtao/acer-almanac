@@ -28,10 +28,11 @@
     "happy-dom": "^20.10.6",
     "release-it": "^20.2.1",
     "typescript": "^6.0.3",
-    "vite-plus": "0.2.2"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   },
   "overrides": {
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.2"
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.6"
   },
   "engines": {
     "node": "^22.13.0 || >= 24.0.0"

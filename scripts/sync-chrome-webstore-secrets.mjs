@@ -17,6 +17,7 @@ const readOption = (name, fallback = null) => {
 
 const dryRun = process.argv.includes("--dry-run");
 const envFile = readOption("--env-file", ".env.chrome-webstore");
+const githubEnvironment = readOption("--github-environment", "chrome-web-store");
 const values = await loadChromeWebStoreEnv(envFile);
 assertChromeWebStoreEnv(values);
 
@@ -38,6 +39,7 @@ if (dryRun) {
   for (const key of CHROME_WEBSTORE_ENV_KEYS) {
     console.log(`${key}=${maskSecret(values[key])}`);
   }
+  console.log(`Target GitHub environment: ${githubEnvironment}`);
   console.log("Dry run only; no GitHub secrets were changed.");
   process.exit(0);
 }
@@ -48,6 +50,6 @@ const repository =
   runGh(["repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"]);
 
 for (const key of CHROME_WEBSTORE_ENV_KEYS) {
-  runGh(["secret", "set", key, "--repo", repository], values[key]);
-  console.log(`Updated ${key} for ${repository}`);
+  runGh(["secret", "set", key, "--repo", repository, "--env", githubEnvironment], values[key]);
+  console.log(`Updated ${key} for ${repository} environment ${githubEnvironment}`);
 }
