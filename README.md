@@ -3,7 +3,9 @@
 Acer 专用老黄历工作区：一个可发布的纯 TypeScript npm 包、一套共享 Lit Web Component、
 Chrome Manifest V3 扩展和 GitHub Pages 在线预览。
 
-在线预览：<https://cixiangtao.github.io/acer-almanac/>
+- 在线预览：<https://cixiangtao.github.io/acer-almanac/>
+- npm：<https://www.npmjs.com/package/acer-almanac>
+- Chrome 扩展：<https://chromewebstore.google.com/detail/acer-老黄历/ebfbfkkfffdlbgicfpallochceijmnnd>
 
 ## 工作区
 
@@ -18,7 +20,7 @@ apps/chrome-extension   Chrome Manifest V3 扩展
 
 ## 开发
 
-仓库使用 Vite+ 与 pnpm：
+仓库使用 Node.js `^22.13.0` 或 `>=24.0.0`、Vite+ 与 pnpm `10.34.4`：
 
 ```bash
 pnpm exec vp install
@@ -53,8 +55,9 @@ if (date) {
 `acer-almanac` 输出 ESM、source map 与 TypeScript 声明。每日宜忌默认使用 `v2`，同一天始终得到
 相同结果；需要回放旧结果时可以传入 `{ fortuneVersion: "v1" }`。
 
-发布由 `release-it` 统一执行。它会在发布前检查格式、lint、类型、测试和真实 npm
-打包内容，然后更新版本、创建 Git commit 与 tag、推送并发布到 npm：
+npm 核心包使用 `packages/core/package.json` 作为版本来源。发布由 `release-it` 统一执行，它会在
+发布前检查格式、lint、类型、测试和真实 npm 打包内容，然后更新核心包版本、创建 Git commit 与
+`v<version>` tag、推送并发布到 npm：
 
 ```bash
 pnpm run release:check
@@ -62,7 +65,16 @@ pnpm run release:dry
 pnpm run release
 ```
 
+完整版本、验证和失败恢复约定见 [发布说明](RELEASING.md)，历史变更见
+[Changelog](CHANGELOG.md)。
+
 ## Chrome 扩展
+
+普通用户可以直接从
+[Chrome Web Store](https://chromewebstore.google.com/detail/acer-老黄历/ebfbfkkfffdlbgicfpallochceijmnnd)
+安装。
+
+本地开发时运行：
 
 ```bash
 pnpm run build:extension
@@ -90,7 +102,7 @@ CWS_PUBLISHER_ID=
 CWS_EXTENSION_ID=
 ```
 
-检查后同步到当前 GitHub 仓库：
+检查后同步到 GitHub 的 `chrome-web-store` environment：
 
 ```bash
 pnpm run cws:secrets -- --dry-run
@@ -100,7 +112,8 @@ pnpm run cws:status
 
 后续提升 `apps/chrome-extension/public/manifest.json` 与
 `apps/chrome-extension/package.json` 的版本号，再从 GitHub Actions 手动运行
-`Publish Chrome Extension`。工作流会执行检查、测试、构建和打包；本地版本已发布或已提交审核时会安全跳过。
+`Publish Chrome Extension`。该工作流只允许从 `master` 发布，会执行检查、测试、构建和打包；
+本地版本已发布或已提交审核时会安全跳过。
 
 ## GitHub Pages
 
@@ -122,3 +135,13 @@ pnpm run cws:status
 - `birthday-change`：用户确认生日时触发，`detail` 为 `{ birthday }`。
 
 两个事件都会冒泡并穿过 Shadow DOM。
+
+## 参与和支持
+
+- 贡献代码前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
+- 普通问题和功能建议请参考 [SUPPORT.md](SUPPORT.md)。
+- 安全漏洞请通过 [SECURITY.md](SECURITY.md) 中的私密渠道报告。
+
+## License
+
+[MIT](LICENSE) © 2026 cixiangtao

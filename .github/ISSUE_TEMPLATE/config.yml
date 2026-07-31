@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 私密报告安全漏洞
+    url: https://github.com/cixiangtao/acer-almanac/security/advisories/new
+    about: 请不要在公开 Issue 中披露漏洞、用户数据或凭据。

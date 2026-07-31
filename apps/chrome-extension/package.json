@@ -2,6 +2,7 @@
   "name": "@acer-almanac/chrome-extension",
   "version": "1.0.2",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "vp build",

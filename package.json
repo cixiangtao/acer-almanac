@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "private": true,
   "description": "A deterministic Chinese almanac npm package, Web Component, Chrome extension, and preview",
+  "license": "MIT",
   "author": "cixiangtao",
   "scripts": {
     "build": "vp run -r build",

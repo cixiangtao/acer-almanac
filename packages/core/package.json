@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/cixiangtao/acer-almanac/issues"
   },
+  "license": "MIT",
   "author": "cixiangtao",
   "repository": {
     "type": "git",

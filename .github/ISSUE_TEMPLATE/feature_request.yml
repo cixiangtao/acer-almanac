@@ -1,0 +1,36 @@
+name: 功能建议
+description: 建议新的能力或改进现有体验。
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: 相关产品
+      options:
+        - npm 核心包
+        - GitHub Pages 预览
+        - Chrome 扩展
+        - 开发或发布工具
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+      description: 请描述用户场景和当前限制。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 描述期望行为；不要求先提供实现。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 可选方案
+      description: 如果考虑过其他方式，可以在这里说明。
