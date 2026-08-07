@@ -55,14 +55,9 @@ if (date) {
 `acer-almanac` 输出 ESM、source map 与 TypeScript 声明。每日宜忌默认使用 `v2`，同一天始终得到
 相同结果；需要回放旧结果时可以传入 `{ fortuneVersion: "v1" }`。
 
-npm 核心包使用 `packages/core/package.json` 作为版本来源。`release-it` 只负责本地检查、版本与
-Changelog 准备和发布提交；Release PR 合入后，由 GitHub Actions 创建 `v<version>` tag 并发布 npm：
-
-```bash
-pnpm run release:check
-pnpm run release:dry
-pnpm run release:prepare -- <version>
-```
+npm 核心包由 Release Please 自动维护发版 PR并同步根目录与 `packages/core/package.json` 的版本。
+维护者检查建议版本、Changelog 和必需 CI 后合并，GitHub Actions 才会构建、创建 `v<version>`、
+发布 npm 并创建 GitHub Release。本地不升版本、不打发版 tag，也不运行 `npm publish`。
 
 完整版本、验证和失败恢复约定见 [发布说明](RELEASING.md)，历史变更见
 [Changelog](CHANGELOG.md)。

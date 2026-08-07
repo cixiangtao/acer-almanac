@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - packages/core/package.json
-      - pnpm-lock.yaml
-      - CHANGELOG.md
 
 permissions:
   contents: read
@@ -47,26 +43,27 @@ jobs:
             [
               .[]
               | select(.merged_at != null)
+              | select(.merge_commit_sha == env.RELEASE_SHA)
               | select(.base.ref == "master")
               | select(.head.repo.full_name == env.GITHUB_REPOSITORY)
-              | select(.head.ref | startswith("release/npm-v"))
+              | select(.head.ref | startswith("release-please--branches--master--"))
+              | select([.labels[].name] | any(. == "autorelease: pending" or . == "autorelease: tagged"))
             ]
             | if length == 1 then .[0] else empty end
           ' <<< "$pull_requests")"
 
           if [[ -z "$release_pr" ]]; then
-            echo "This commit is not the merge of one npm release PR; publication is skipped."
+            echo "This commit is not the merge of one automated release PR; publication is skipped."
             exit 0
           fi
 
           pr_number="$(jq -r '.number' <<< "$release_pr")"
-          head_ref="$(jq -r '.head.ref' <<< "$release_pr")"
-          base_sha="$(jq -r '.base.sha' <<< "$release_pr")"
+          base_sha="$(git rev-parse "${RELEASE_SHA}^")"
           version="$(node -p 'require("./packages/core/package.json").version')"
           tag="v${version}"
 
-          if [[ "$head_ref" != "release/npm-${tag}" ]]; then
-            echo "Release branch ${head_ref} must be release/npm-${tag}." >&2
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid stable release version: ${version}" >&2
             exit 1
           fi
 
@@ -77,7 +74,7 @@ jobs:
             --jq '.[].filename')"
           while IFS= read -r file; do
             case "$file" in
-              packages/core/package.json|pnpm-lock.yaml|CHANGELOG.md) ;;
+              .release-please-manifest.json|package.json|packages/core/package.json|CHANGELOG.md) ;;
               *)
                 echo "npm release PR #${pr_number} contains non-release file: ${file}" >&2
                 exit 1
@@ -93,6 +90,13 @@ jobs:
           cmp \
             "$RUNNER_TEMP/package.base.normalized.json" \
             "$RUNNER_TEMP/package.release.normalized.json"
+          git show "${base_sha}:package.json" > "$RUNNER_TEMP/workspace.base.json"
+          jq -S 'del(.version)' "$RUNNER_TEMP/workspace.base.json" > "$RUNNER_TEMP/workspace.base.normalized.json"
+          jq -S 'del(.version)' package.json > "$RUNNER_TEMP/workspace.release.normalized.json"
+          cmp "$RUNNER_TEMP/workspace.base.normalized.json" "$RUNNER_TEMP/workspace.release.normalized.json"
+          test "$(node -p 'require("./package.json").version')" = "$version"
+          test "$(jq -r '.["."]' .release-please-manifest.json)" = "$version"
+          grep -F "$version" CHANGELOG.md >/dev/null
 
           git fetch --force --tags origin
           if git rev-parse --verify --quiet "refs/tags/${tag}" >/dev/null; then
@@ -196,7 +200,54 @@ jobs:
             npm publish artifacts/*.tgz --access public --provenance
           fi
 
-      - name: Verify npm publication
+      - name: Create or repair GitHub Release
         env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.gate.outputs.tag }}
+        run: |
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --verify-tag --title "$TAG" --generate-notes --latest
+          fi
+
+      - name: Verify publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.gate.outputs.tag }}
           VERSION: ${{ needs.gate.outputs.version }}
-        run: test "$(npm view acer-almanac@"$VERSION" version)" = "$VERSION"
+        run: |
+          test "$(npm view acer-almanac@"$VERSION" version)" = "$VERSION"
+          gh release view "$TAG" --json tagName,isDraft,isPrerelease,url
+
+  release-pr:
+    name: Maintain automated release PR
+    needs: [gate, publish]
+    if: >-
+      always() &&
+      needs.gate.result == 'success' &&
+      (needs.gate.outputs.release != 'true' || needs.publish.result == 'success')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Verify release controller credentials
+        env:
+          CLIENT_ID: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          PRIVATE_KEY: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+        run: |
+          test -n "$CLIENT_ID" || { echo "RELEASE_APP_CLIENT_ID is not configured." >&2; exit 1; }
+          test -n "$PRIVATE_KEY" || { echo "RELEASE_APP_PRIVATE_KEY is not configured." >&2; exit 1; }
+      - name: Create short-lived release controller token
+        id: release-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+      - name: Create or update release PR
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          token: ${{ steps.release-token.outputs.token }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

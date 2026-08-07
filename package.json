@@ -19,14 +19,11 @@
     "package:extension": "node scripts/package-chrome-extension.mjs",
     "prepare": "vp config && vp run acer-almanac#build",
     "release:check": "pnpm run check && pnpm run test && pnpm run build:core && cd packages/core && npm pack --dry-run --json",
-    "release:dry": "cd packages/core && release-it --dry-run",
-    "release:prepare": "cd packages/core && release-it",
     "test": "vp test"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.6",
     "happy-dom": "^20.10.6",
-    "release-it": "^20.2.1",
     "typescript": "^6.0.3",
     "vite": "catalog:",
     "vite-plus": "catalog:"
