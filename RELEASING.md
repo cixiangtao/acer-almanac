@@ -11,15 +11,20 @@
 - 交付目标：npm registry
 - 变更记录：根目录 `CHANGELOG.md`
 
-发布前运行：
+从最新 `master` 创建 `release/npm-v<version>` 分支，然后运行：
 
 ```bash
 pnpm run release:check
 pnpm run release:dry
+pnpm run release:prepare -- <version>
 ```
 
-确认版本和 Changelog 后运行 `pnpm run release`。`release-it` 会执行质量门禁、更新核心包版本、
-创建 release commit 和 tag、推送并发布到 npm。
+`release-it` 只执行质量门禁、更新核心包版本和锁文件，并创建本地发布提交。更新 Changelog 后，
+推送该分支并创建只包含 `packages/core/package.json`、`pnpm-lock.yaml` 和 `CHANGELOG.md` 的 Release PR。
+该 PR 合入后，GitHub Actions 会在批准的合并提交上创建 tag，并通过 npm trusted publishing 发布。
+
+首次使用该流程前，需要在 npm 包设置中将 trusted publisher 配置为 GitHub Actions、仓库
+`cixiangtao/acer-almanac`、工作流 `release-npm.yml`，并允许 `npm publish`；仓库不保存长期 npm 发布令牌。
 
 发布后应独立检查：
 
@@ -40,9 +45,11 @@ npm view acer-almanac version dist-tags --json
 - 交付目标：Chrome Web Store
 - 凭据边界：GitHub `chrome-web-store` environment
 
-两个版本文件必须同步提升。推送并通过 Pull Request 检查后，从 GitHub Actions 的
-`Publish Chrome Extension` 手动触发。工作流会检查、测试、构建、打包，并在本地版本已经发布或
-已提交时跳过重复上传。
+两个版本文件必须同步提升。从最新 `master` 创建 `release/chrome-v<version>`，只更新两个版本文件
+和 Changelog，然后创建 Release PR。该 PR 通过检查并合入后，`Publish Chrome Extension` 会反查
+合并来源、检查受限 diff，再执行检查、测试、构建、打包和商店提交。
+
+手工 tag、workflow dispatch 和本地上传都不是正式发布入口。其他无关 PR 可以继续保持打开状态。
 
 `PENDING_REVIEW`、`STAGED` 和 `PUBLISHED` 是不同交付状态。工作流成功提交不代表用户已经可以安装；
 发布后必须使用 `pnpm run cws:status` 和公开商店页面分别验证。
