@@ -1,0 +1,6 @@
+interface:
+  display_name: "Acer Almanac"
+  short_description: "Repo-specific patterns and workflows for acer-almanac"
+  default_prompt: "Use the acer-almanac repo skill to follow existing architecture, testing, and workflow conventions."
+policy:
+  allow_implicit_invocation: true
