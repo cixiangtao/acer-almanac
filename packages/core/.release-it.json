@@ -2,16 +2,20 @@
   "$schema": "https://unpkg.com/release-it@20/schema/release-it.json",
   "git": {
     "commitMessage": "chore(release): v${version}",
-    "requireBranch": "master",
+    "requireBranch": "release/npm-v*",
     "requireCleanWorkingDir": true,
-    "tagName": "v${version}"
+    "tag": false,
+    "push": false
   },
   "hooks": {
-    "before:init": "pnpm --dir ../.. run release:check"
+    "before:init": "pnpm --dir ../.. run release:check",
+    "after:bump": "pnpm --dir ../.. install --lockfile-only && test \"$(git branch --show-current)\" = \"release/npm-v${version}\"",
+    "after:release": "echo Prepared release PR commit for ${name} v${version}"
   },
   "npm": {
-    "publish": true,
-    "publishArgs": ["--access", "public"],
-    "timeout": 30
+    "publish": false
+  },
+  "github": {
+    "release": false
   }
 }

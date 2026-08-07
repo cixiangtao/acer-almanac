@@ -55,14 +55,13 @@ if (date) {
 `acer-almanac` 输出 ESM、source map 与 TypeScript 声明。每日宜忌默认使用 `v2`，同一天始终得到
 相同结果；需要回放旧结果时可以传入 `{ fortuneVersion: "v1" }`。
 
-npm 核心包使用 `packages/core/package.json` 作为版本来源。发布由 `release-it` 统一执行，它会在
-发布前检查格式、lint、类型、测试和真实 npm 打包内容，然后更新核心包版本、创建 Git commit 与
-`v<version>` tag、推送并发布到 npm：
+npm 核心包使用 `packages/core/package.json` 作为版本来源。`release-it` 只负责本地检查、版本与
+Changelog 准备和发布提交；Release PR 合入后，由 GitHub Actions 创建 `v<version>` tag 并发布 npm：
 
 ```bash
 pnpm run release:check
 pnpm run release:dry
-pnpm run release
+pnpm run release:prepare -- <version>
 ```
 
 完整版本、验证和失败恢复约定见 [发布说明](RELEASING.md)，历史变更见
@@ -110,10 +109,10 @@ pnpm run cws:secrets
 pnpm run cws:status
 ```
 
-后续提升 `apps/chrome-extension/public/manifest.json` 与
-`apps/chrome-extension/package.json` 的版本号，再从 GitHub Actions 手动运行
-`Publish Chrome Extension`。该工作流只允许从 `master` 发布，会执行检查、测试、构建和打包；
-本地版本已发布或已提交审核时会安全跳过。
+后续从最新 `master` 创建 `release/chrome-v<version>`，同步提升
+`apps/chrome-extension/public/manifest.json` 与 `apps/chrome-extension/package.json`，并通过
+Release PR 合入。`Publish Chrome Extension` 只接受这类已合并 PR，会执行来源检查、测试、构建、
+打包和商店提交；本地版本已发布或已提交审核时会安全跳过。
 
 ## GitHub Pages
 
