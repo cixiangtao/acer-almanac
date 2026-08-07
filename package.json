@@ -22,7 +22,7 @@
     "test": "vp test"
   },
   "devDependencies": {
-    "@types/chrome": "^0.1.6",
+    "@types/chrome": "^0.2.5",
     "happy-dom": "^20.11.1",
     "typescript": "^7.0.2",
     "vite": "catalog:",
