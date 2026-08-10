@@ -1,6 +1,6 @@
 {
   "name": "acer-almanac",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Deterministic Chinese almanac, lunar date, fortune, and birthday luck utilities",
   "keywords": [
     "almanac",
