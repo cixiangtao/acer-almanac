@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      release_pr:
+        description: Merged Release Please PR number to resume
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -21,6 +27,8 @@ jobs:
       release: ${{ steps.release.outputs.release }}
       tag: ${{ steps.release.outputs.tag }}
       version: ${{ steps.release.outputs.version }}
+      sha: ${{ steps.release.outputs.sha }}
+      pr-number: ${{ steps.release.outputs.pr-number }}
     steps:
       - name: Checkout release commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -31,14 +39,30 @@ jobs:
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
+          RECOVERY_PR: ${{ inputs.release_pr || '' }}
           RELEASE_SHA: ${{ github.sha }}
         shell: bash
         run: |
           echo "release=false" >> "$GITHUB_OUTPUT"
 
-          pull_requests="$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            "repos/${GITHUB_REPOSITORY}/commits/${RELEASE_SHA}/pulls")"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            if [[ ! "$RECOVERY_PR" =~ ^[1-9][0-9]*$ ]]; then
+              echo "A numeric merged release PR is required for recovery." >&2
+              exit 1
+            fi
+            pull_requests="$(gh api -H "Accept: application/vnd.github+json" \
+              "repos/${GITHUB_REPOSITORY}/pulls/${RECOVERY_PR}" | jq -c '[.]')"
+            RELEASE_SHA="$(jq -r '.[0].merge_commit_sha // empty' <<< "$pull_requests")"
+            if [[ -z "$RELEASE_SHA" ]]; then
+              echo "Release PR #${RECOVERY_PR} is not merged." >&2
+              exit 1
+            fi
+          else
+            pull_requests="$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              "repos/${GITHUB_REPOSITORY}/commits/${RELEASE_SHA}/pulls")"
+          fi
+          export RELEASE_SHA
           release_pr="$(jq -c '
             [
               .[]
@@ -58,7 +82,11 @@ jobs:
           fi
 
           pr_number="$(jq -r '.number' <<< "$release_pr")"
-          base_sha="$(git rev-parse "${RELEASE_SHA}^")"
+          base_sha="$(jq -r '.base.sha' <<< "$release_pr")"
+          base_branch="$(jq -r '.base.ref' <<< "$release_pr")"
+          git fetch --force origin "$base_branch" --tags
+          git merge-base --is-ancestor "$RELEASE_SHA" "origin/${base_branch}"
+          git checkout --detach "$RELEASE_SHA"
           version="$(node -p 'require("./packages/core/package.json").version')"
           tag="v${version}"
 
@@ -110,6 +138,8 @@ jobs:
           echo "release=true" >> "$GITHUB_OUTPUT"
           echo "tag=${tag}" >> "$GITHUB_OUTPUT"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "sha=${RELEASE_SHA}" >> "$GITHUB_OUTPUT"
+          echo "pr-number=${pr_number}" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build and pack npm artifact
@@ -119,6 +149,8 @@ jobs:
     steps:
       - name: Checkout release commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.gate.outputs.sha }}
 
       - name: Set up Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -157,10 +189,13 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Checkout release commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ needs.gate.outputs.sha }}
           fetch-depth: 0
 
       - name: Set up Node.js
@@ -177,17 +212,18 @@ jobs:
 
       - name: Create release tag
         env:
+          RELEASE_SHA: ${{ needs.gate.outputs.sha }}
           TAG: ${{ needs.gate.outputs.tag }}
         run: |
           git fetch --force --tags origin
           if git rev-parse --verify --quiet "refs/tags/${TAG}" >/dev/null; then
-            test "$(git rev-list -n 1 "$TAG")" = "$GITHUB_SHA"
+            test "$(git rev-list -n 1 "$TAG")" = "$RELEASE_SHA"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$TAG" -m "Release ${TAG}" "$GITHUB_SHA"
+          git tag -a "$TAG" -m "Release ${TAG}" "$RELEASE_SHA"
           git push origin "refs/tags/${TAG}"
 
       - name: Publish with npm trusted publishing
@@ -217,6 +253,15 @@ jobs:
         run: |
           test "$(npm view acer-almanac@"$VERSION" version)" = "$VERSION"
           gh release view "$TAG" --json tagName,isDraft,isPrerelease,url
+
+      - name: Mark release PR complete
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ needs.gate.outputs.pr-number }}
+        run: |
+          if gh pr view "$PR_NUMBER" --json labels --jq '.labels[].name' | grep -Fxq "autorelease: pending"; then
+            gh pr edit "$PR_NUMBER" --remove-label "autorelease: pending"
+          fi
 
   release-pr:
     name: Maintain automated release PR
