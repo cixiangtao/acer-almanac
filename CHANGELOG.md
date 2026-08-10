@@ -2,6 +2,15 @@
 
 本项目的重要变更记录在此文件中。npm 核心包版本遵循 Semantic Versioning。
 
+## [1.0.3](https://github.com/cixiangtao/acer-almanac/compare/v1.0.2...v1.0.3) (2026-08-10)
+
+
+### Bug Fixes
+
+* **deps:** 🐛 keep Actions majors manual ([#12](https://github.com/cixiangtao/acer-almanac/issues/12)) ([4129f15](https://github.com/cixiangtao/acer-almanac/commit/4129f1533c9f3fa636b40932558dde36fe147214))
+* **deps:** keep pre-1.0 minors manual ([#15](https://github.com/cixiangtao/acer-almanac/issues/15)) ([2867f79](https://github.com/cixiangtao/acer-almanac/commit/2867f79c7b79d6ff731a0a0a7674e7c3cab47bcb))
+* standardize package documentation and maintenance ([#16](https://github.com/cixiangtao/acer-almanac/issues/16)) ([033c29c](https://github.com/cixiangtao/acer-almanac/commit/033c29c58deb7364cfc75460ba811674bae42a91))
+
 ## [Unreleased]
 
 ### Added

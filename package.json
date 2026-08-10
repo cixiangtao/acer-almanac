@@ -1,6 +1,6 @@
 {
   "name": "acer-almanac-workspace",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "description": "A deterministic Chinese almanac npm package, Web Component, Chrome extension, and preview",
   "license": "MIT",
