@@ -1,19 +1,11 @@
-# 安全政策
+# Security Policy
 
-## 报告安全漏洞
+English | [简体中文](SECURITY.zh-CN.md)
 
-请通过 GitHub 的
-[Private Vulnerability Reporting](https://github.com/cixiangtao/acer-almanac/security/advisories/new)
-私密报告可能影响 npm 包、GitHub Pages 或 Chrome 扩展的安全问题。
+Report suspected vulnerabilities affecting the npm package, GitHub Pages site, or Chrome extension through [GitHub Private Vulnerability Reporting](https://github.com/cixiangtao/acer-almanac/security/advisories/new).
 
-请不要在公开 Issue 中披露漏洞、利用方法、用户数据或有效凭据。报告中可以包含：
+Do not disclose vulnerabilities, exploit details, user data, or active credentials in a public issue. A useful report includes the affected product and version, reproduction steps, expected impact, known mitigations, and a minimal example with no real user data or secrets.
 
-- 受影响的产品与版本；
-- 可复现步骤和预期影响；
-- 已知的缓解方式；
-- 不含真实用户数据和密钥的最小示例。
+Use [GitHub Issues](https://github.com/cixiangtao/acer-almanac/issues) for ordinary bugs, feature requests, and privacy-policy questions that do not present a security risk.
 
-普通缺陷、功能建议和不涉及安全风险的隐私政策问题可以通过
-[GitHub Issues](https://github.com/cixiangtao/acer-almanac/issues) 提交。
-
-项目不承诺固定响应时限；维护者会根据影响范围和可复现性评估报告，并在适合公开时协调披露。
+The project does not promise a fixed response time. Reports are evaluated by impact and reproducibility, and disclosure is coordinated when appropriate.
