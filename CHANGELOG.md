@@ -2,6 +2,13 @@
 
 本项目的重要变更记录在此文件中。npm 核心包版本遵循 Semantic Versioning。
 
+## [1.0.4](https://github.com/cixiangtao/acer-almanac/compare/v1.0.3...v1.0.4) (2026-08-10)
+
+
+### Bug Fixes
+
+* **release:** publish the packed tarball by file path ([#17](https://github.com/cixiangtao/acer-almanac/issues/17)) ([4292de7](https://github.com/cixiangtao/acer-almanac/commit/4292de7ee4cfd2968fb769ec4ee61e15b1f75d05))
+
 ## [1.0.3](https://github.com/cixiangtao/acer-almanac/compare/v1.0.2...v1.0.3) (2026-08-10)
 
 
