@@ -20,7 +20,9 @@
     "directory": "packages/core"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "README.zh-CN.md"
   ],
   "type": "module",
   "sideEffects": false,

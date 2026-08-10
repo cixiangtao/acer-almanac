@@ -1,16 +1,18 @@
 # acer-almanac
 
-零运行时依赖的 TypeScript 老黄历核心包。同一个日期会稳定生成相同的农历、宜忌和运势结果。
+English | [简体中文](README.zh-CN.md)
 
-## 安装
+A zero-runtime-dependency TypeScript package for deterministic Chinese almanac, lunar date, daily fortune, and birthday-luck calculations. The same date and inputs produce the same result.
 
-需要 Node.js 22 或更高版本。
+## Install
+
+Requires Node.js 22 or newer.
 
 ```bash
 pnpm add acer-almanac
 ```
 
-## 使用
+## Usage
 
 ```ts
 import { createAlmanac, parseIsoDate } from "acer-almanac";
@@ -30,19 +32,18 @@ if (date) {
 }
 ```
 
-`createAlmanac` 默认使用 `v2` 宜忌生成器。需要回放历史结果时，可传入
-`{ fortuneVersion: "v1" }`。
+`createAlmanac` uses the `v2` daily-fortune generator by default. Pass `{ fortuneVersion: "v1" }` to replay historical output.
 
-包同时导出日期解析、农历、宜忌和生日运势等细粒度 API，并附带完整 TypeScript 类型声明。
+The package also exports focused date parsing, lunar-calendar, daily-fortune, and birthday-luck APIs with complete TypeScript declarations.
 
-## 链接
+## Links
 
-- [在线预览](https://cixiangtao.github.io/acer-almanac/)
-- [源码与完整文档](https://github.com/cixiangtao/acer-almanac)
-- [问题反馈](https://github.com/cixiangtao/acer-almanac/issues)
-- [安全报告](https://github.com/cixiangtao/acer-almanac/security/policy)
+- [Live preview](https://cixiangtao.github.io/acer-almanac/)
+- [Source and full documentation](https://github.com/cixiangtao/acer-almanac)
+- [Issues](https://github.com/cixiangtao/acer-almanac/issues)
+- [Private security reporting](https://github.com/cixiangtao/acer-almanac/security/advisories/new)
 - [Changelog](https://github.com/cixiangtao/acer-almanac/blob/master/CHANGELOG.md)
 
 ## License
 
-[MIT](LICENSE) © 2026 cixiangtao
+[MIT](https://github.com/cixiangtao/acer-almanac/blob/master/LICENSE) © 2026 cixiangtao
