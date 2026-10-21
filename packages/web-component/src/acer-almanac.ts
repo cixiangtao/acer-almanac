@@ -581,17 +581,19 @@ export class AcerAlmanac extends LitElement {
           @input=${(event: InputEvent) => this._updateBirthdayDraft(event)}
         />
         <div class="form-actions">
-          ${this._birthdayDate
-            ? html`<button
-                class="small-button"
-                type="button"
-                @click=${() => {
-                  this._editingBirthday = false;
-                }}
-              >
-                取消
-              </button>`
-            : nothing}
+          ${
+            this._birthdayDate
+              ? html`<button
+                  class="small-button"
+                  type="button"
+                  @click=${() => {
+                    this._editingBirthday = false;
+                  }}
+                >
+                  取消
+                </button>`
+              : nothing
+          }
           <button
             class="small-button primary"
             data-action="save-birthday"
@@ -628,9 +630,11 @@ export class AcerAlmanac extends LitElement {
                 <div>
                   <p class="activity">
                     <span>${activity}</span>
-                    ${category
-                      ? html`<span class="category">${FORTUNE_CATEGORY_LABELS[category]}</span>`
-                      : nothing}
+                    ${
+                      category
+                        ? html`<span class="category">${FORTUNE_CATEGORY_LABELS[category]}</span>`
+                        : nothing
+                    }
                   </p>
                   <p class="description">${description}</p>
                 </div>
@@ -662,20 +666,22 @@ export class AcerAlmanac extends LitElement {
             <p class="lunar">${almanac.lunar.text}</p>
           </div>
           <div class="luck-panel" part="luck">
-            ${showBirthdayEditor
-              ? this._renderBirthdayEditor()
-              : html`<button
-                  class="luck-button"
-                  data-action="edit-birthday"
-                  type="button"
-                  title="当日运势指数：${almanac.luck?.score}%（点击修改生日）"
-                  @click=${() => this._startBirthdayEdit()}
-                >
-                  <span class="luck-label" style="color: ${almanac.luck?.color}"
-                    >${almanac.luck?.label}</span
+            ${
+              showBirthdayEditor
+                ? this._renderBirthdayEditor()
+                : html`<button
+                    class="luck-button"
+                    data-action="edit-birthday"
+                    type="button"
+                    title="当日运势指数：${almanac.luck?.score}%（点击修改生日）"
+                    @click=${() => this._startBirthdayEdit()}
                   >
-                  <span class="luck-score">运势 ${almanac.luck?.score}% · 修改生日</span>
-                </button>`}
+                    <span class="luck-label" style="color: ${almanac.luck?.color}"
+                      >${almanac.luck?.label}</span
+                    >
+                    <span class="luck-score">运势 ${almanac.luck?.score}% · 修改生日</span>
+                  </button>`
+            }
           </div>
         </header>
 
