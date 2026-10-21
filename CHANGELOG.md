@@ -2,6 +2,13 @@
 
 本项目的重要变更记录在此文件中。npm 核心包版本遵循 Semantic Versioning。
 
+## [1.0.5](https://github.com/cixiangtao/acer-almanac/compare/v1.0.4...v1.0.5) (2026-10-21)
+
+
+### Bug Fixes
+
+* **deps:** bump vite-plus from 0.2.6 to 1.1.0 ([#21](https://github.com/cixiangtao/acer-almanac/issues/21)) ([b9512d9](https://github.com/cixiangtao/acer-almanac/commit/b9512d94bf3d10a67849955e5ace74c90a72a318))
+
 ## [1.0.4](https://github.com/cixiangtao/acer-almanac/compare/v1.0.3...v1.0.4) (2026-08-10)
 
 
