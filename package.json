@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.2.5",
-    "happy-dom": "^20.11.1",
+    "happy-dom": "^21.0.4",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
